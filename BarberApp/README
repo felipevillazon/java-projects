@@ -1,0 +1,72 @@
+# Appointment App
+
+## Overview
+
+The Appointment App is designed to streamline the process of booking appointments in a barber shop, although it can be adapted for various appointment needs. The application allows users to create accounts, manage multiple barbers, and view availability for the next week based on the selected date.
+
+## Features
+
+- **User Management**: Create and manage multiple user accounts.
+- **Barber Management**: Each user can manage several barbers.
+- **Weekly Schedule View**: Select a date from a monthly calendar to view the availability of the selected barber for the next seven days.
+- **Appointment Booking**: Book appointments by selecting available time slots.
+- **Appointment Cancellation**: Cancel existing appointments by right-clicking on the booked slot.
+- **Data Persistence**: All data is stored using SQLite, ensuring persistent and reliable storage.
+
+## Technologies Used
+
+- **Java**: Core programming language used for the application logic.
+- **JavaFX**: Framework used for building the graphical user interface (GUI).
+- **SceneBuilder**: Tool used to design the JavaFX GUI.
+- **SQLite**: Lightweight database used for storing user, barber, and appointment data.
+
+
+## Usage
+
+1. **Create User Accounts**:
+    - Launch the application.
+    - Create a new user account by providing the necessary details.
+
+2. **Manage Barbers**:
+    - After logging in, add barbers to your account.
+    - Provide details for each barber you manage.
+
+3. **View and Book Appointments**:
+    - Navigate to the monthly calendar view.
+    - Select a date to view the availability for the next seven days.
+    - Click on available time slots to book appointments.
+    - Provide the client's name when prompted.
+
+4. **Cancel Appointments**:
+    - Right-click on a booked slot.
+    - Confirm the cancellation in the dialog box that appears.
+
+## Database Schema
+
+The database schema includes the following tables:
+
+1. **Users**:
+    - `id` (INTEGER, PRIMARY KEY, AUTOINCREMENT)
+    - `username` (TEXT, UNIQUE, NOT NULL)
+    - `password` (TEXT, NOT NULL)
+
+2. **Barbers**:
+    - `id` (INTEGER, PRIMARY KEY, AUTOINCREMENT)
+    - `user_id` (INTEGER, FOREIGN KEY REFERENCES Users(id))
+    - `name` (TEXT, NOT NULL)
+
+3. **Appointments**:
+    - `appointment_id` (INTEGER, PRIMARY KEY, AUTOINCREMENT)
+    - `user_id` (INTEGER, FOREIGN KEY REFERENCES Users(id))
+    - `barber_id` (INTEGER, FOREIGN KEY REFERENCES Barbers(id))
+    - `date` (DATE, NOT NULL)
+    - `time` (TIME, NOT NULL)
+    - `is_taken` (BOOLEAN, NOT NULL, CHECK (is_taken IN (0, 1)) DEFAULT 0)
+    - `clientName` (TEXT, NOT NULL)
+
+
+## Acknowledgements
+
+- Thanks to the developers of JavaFX and SceneBuilder for providing powerful tools for building modern Java applications.
+- Special thanks to the SQLite team for providing a reliable and easy-to-use database solution.
+
